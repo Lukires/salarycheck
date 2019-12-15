@@ -24,7 +24,7 @@ class App extends React.Component {
       <h1 className="Title">Sammenlign din løn</h1>
       <div className="Body">
         <Paper elevation={6}>
-
+          {this.getBody()}
         </Paper>
       </div>
     </div>

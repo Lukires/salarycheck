@@ -1,4 +1,7 @@
 import React from 'react';
+import TextField from '@material-ui/core/TextField';
+import './SalarySurvey.css';
+import Typography from '@material-ui/core/Typography';
 
 class SalarySuvery extends React.Component {
     constructor(props) {
@@ -7,7 +10,14 @@ class SalarySuvery extends React.Component {
 
     render() {
         return(
-            <div></div>
+            <div className="SalarySurvey">
+                <form id="SalarySurveyForm">
+                    <Typography variant="subtitle1" gutterBottom>
+                        Indtast din gennemsnitlige månedsløn:
+                        </Typography>
+                    <TextField required id="salary" label="Løn"/>
+                </form>
+            </div>
         );
     }
 }

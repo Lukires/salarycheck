@@ -2,3 +2,11 @@
 #SalarySurveyForm {
     padding-top: 100px;
 }
+
+.selectItemSurvey {
+    padding-top: 35px;
+}
+
+.selectItemSurvey .MuiInputLabel-root {
+    padding-right: 170px;
+}

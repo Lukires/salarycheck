@@ -7,6 +7,7 @@
     padding-top: 35px;
 }
 
-.selectItemSurvey .MuiInputLabel-root {
-    padding-right: 170px;
+
+.selectItemSurvey .MuiInputLabel-root .arbejdsfunktion {
+    padding-right: 100%;
 }

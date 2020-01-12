@@ -186,7 +186,7 @@ class SalarySuvery extends React.Component {
                 <div className="SalarySurvey">
                     <form id="SalarySurveyForm" onSubmit={this.handleSubmit} >
                         <Typography variant="subtitle1" gutterBottom>
-                            Sammenlign dig selv mod gennemsnittet:
+                            Sammenlign dig selv med gennemsnittet:
                             </Typography>
                         <TextField required id="salary" label="Indtast din månedlige løn" onChange={this.handleChange('salary')} />
                         <br />
@@ -482,7 +482,7 @@ class SalarySuvery extends React.Component {
                         Hvordan bruger jeg denne data?
                     </Typography>
                     <Typography variant="caption" gutterBottom>
-                        Hvis du har fået et lavt tal i kategorier der omhandler udannelse, uddannelsesniveau, eller arbejdsfunktion, så bliver du umiddelbart underbetalt, sammenlignet med gennemsnittet. Hvis dette er tilfældet, så burde du tage aktion for at få dette til at ændre sig. Du kan eventuelt bruge dette, som grundlag til din arbejdsgiver, når i forhandler løn.
+                        100% vil sige, at du tjener det samme som gennemsnittet. Hvis du har fået et lavt tal i kategorier der omhandler udannelse, uddannelsesniveau, eller arbejdsfunktion, så bliver du umiddelbart underbetalt, sammenlignet med gennemsnittet. Hvis dette er tilfældet, så burde du tage aktion for at få dette til at ændre sig. Du kan eventuelt bruge dette, som grundlag til din arbejdsgiver, når i forhandler løn.
                     </Typography>
                 </div>
             );

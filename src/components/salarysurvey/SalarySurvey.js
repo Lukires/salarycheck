@@ -6,6 +6,8 @@ import NativeSelect from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import loading from '../../assets/loading.gif';
 import Button from '@material-ui/core/Button';
+import Chart from "react-apexcharts";
+import Paper from '@material-ui/core/Paper';
 
 class SalarySuvery extends React.Component {
     constructor(props) {
@@ -26,7 +28,7 @@ class SalarySuvery extends React.Component {
         console.log(event.target);
         event.preventDefault();
 
-        this.setState({loaded: false});
+        this.setState({ loaded: false });
 
         //const { gender, age, area, sektor, enhed, indkomst, uddannelse, uddannelsesniveau, arbejdsfunktion } = this.state;
         //console.log(this.state);
@@ -41,7 +43,7 @@ class SalarySuvery extends React.Component {
         //KØN < YES
         //ÅR < 2018
 
-        //UDDANNELSE
+        //UDDANNELSE & SEKTOR
         await fetch("https://api.statbank.dk/v1/data/LONS11/JSONSTAT?valuePresentation=CodeAndValue&timeOrder=Ascending&UDDANNELSE=" + this.state["uddannelse"] + "&SEKTOR=" + this.state.sektor + "&AFLOEN=TIFA&LONGRP=LTOT&L%C3%98NM%C3%85L=FORINKL&K%C3%98N=" + this.state["gender"] + "&Tid=2018")
             .then(res => res.json())
             .then(
@@ -73,7 +75,7 @@ class SalarySuvery extends React.Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    this.setState({ LONS50: result.dataset.value });
+                    this.setState({ LONS20: result.dataset.value });
                 }
             )
 
@@ -88,7 +90,7 @@ class SalarySuvery extends React.Component {
         //OMRÅDE & UDDNIV
 
         console.log("done");
-        this.setState({loaded: true, survey: false});
+        this.setState({ loaded: true, survey: false });
         console.log(this.state);
 
 
@@ -187,9 +189,9 @@ class SalarySuvery extends React.Component {
                             Sammenlign dig selv mod gennemsnittet:
                             </Typography>
                         <TextField required id="salary" label="Indtast din månedlige løn" onChange={this.handleChange('salary')} />
-                        <br/>
-                        <br/>
-                        <TextField required id="hours" label="Månedlige timers arbejde" onChange={this.handleChange('hours')}/>
+                        <br />
+                        <br />
+                        <TextField required id="hours" label="Månedlige timers arbejde" onChange={this.handleChange('hours')} />
 
                         <div className="selectItemSurvey">
                             <InputLabel required htmlFor="gender-native-simple">Køn</InputLabel>
@@ -314,9 +316,174 @@ class SalarySuvery extends React.Component {
                 </div>
             );
         } else {
+
+            var lons11 = Math.round((100*100*parseInt(this.state.salary)/(this.state.LONS11[0]*parseInt(this.state.hours, 10)))/100);
+            var lons30 = Math.round((100*100*parseInt(this.state.salary)/(this.state.LONS30[0]*parseInt(this.state.hours, 10)))/100);
+            var lons50 = Math.round((100*100*parseInt(this.state.salary)/(this.state.LONS50[0]*parseInt(this.state.hours, 10)))/100);
+            var lons20 = Math.round((100*100*parseInt(this.state.salary)/(this.state.LONS20[0]*parseInt(this.state.hours, 10)))/100);
+            var INDKP107 = Math.round((100*100*12*parseInt(this.state.salary)/(this.state.INDKP107[0]))/100);
             return (
                 <div>
-                    <p>Hello!</p>
+                    <div className="salaryBox">
+                        <Paper className="salaryPaperBox" elevation={1}>
+                            <div className="radialBar">
+                                <Chart type="radialBar"
+                                    options={{
+                                        chart: {
+                                            height: 350,
+                                            type: 'radialBar',
+                                        },
+                                        plotOptions: {
+                                            radialBar: {
+                                                hollow: {
+                                                    size: '70%',
+                                                }
+                                            },
+                                        },
+                                        labels: ['Løn']
+                                    }}
+                                    series={[lons11]}
+                                    labels={['Progress']}
+                                    width="90%"></Chart>
+                            </div>
+                            <div className="salaryText">
+                                <Typography variant="caption" gutterBottom>
+                                Du tjener {lons11}% i forhold til gennemsnittet i din sektor, med den samme uddannelse som dig
+                                </Typography>
+                            </div>
+                        </Paper>
+                    </div>
+                    
+                    <div className="salaryBox">
+                        <Paper className="salaryPaperBox" elevation={1}>
+                            <div className="radialBar">
+                                <Chart type="radialBar"
+                                    options={{
+                                        chart: {
+                                            height: 350,
+                                            type: 'radialBar',
+                                        },
+                                        plotOptions: {
+                                            radialBar: {
+                                                hollow: {
+                                                    size: '70%',
+                                                }
+                                            },
+                                        },
+                                        labels: ['Løn']
+                                    }}
+                                    series={[lons30]}
+                                    labels={['Progress']}
+                                    width="90%"></Chart>
+                            </div>
+                            <div className="salaryText">
+                                <Typography variant="caption" gutterBottom>
+                                Du tjener {lons30}% i forhold til gennemsnittet i din sektor, der bor i samme område som dig
+                                </Typography>
+                            </div>
+                        </Paper>
+                    </div>
+
+
+                    <div className="salaryBox">
+                        <Paper className="salaryPaperBox" elevation={1}>
+                            <div className="radialBar">
+                                <Chart type="radialBar"
+                                    options={{
+                                        chart: {
+                                            height: 350,
+                                            type: 'radialBar',
+                                        },
+                                        plotOptions: {
+                                            radialBar: {
+                                                hollow: {
+                                                    size: '70%',
+                                                }
+                                            },
+                                        },
+                                        labels: ['Løn']
+                                    }}
+                                    series={[lons50]}
+                                    labels={['Progress']}
+                                    width="90%"></Chart>
+                            </div>
+                            <div className="salaryText">
+                                <Typography variant="caption" gutterBottom>
+                                Du tjener {lons50}% i forhold til gennemsnittet i din sektor og aldersgruppe
+                                </Typography>
+                            </div>
+                        </Paper>
+                    </div>
+
+
+                    <div className="salaryBox">
+                        <Paper className="salaryPaperBox" elevation={1}>
+                            <div className="radialBar">
+                                <Chart type="radialBar"
+                                    options={{
+                                        chart: {
+                                            height: 350,
+                                            type: 'radialBar',
+                                        },
+                                        plotOptions: {
+                                            radialBar: {
+                                                hollow: {
+                                                    size: '70%',
+                                                }
+                                            },
+                                        },
+                                        labels: ['Løn']
+                                    }}
+                                    series={[lons20]}
+                                    labels={['Progress']}
+                                    width="90%"></Chart>
+                            </div>
+                            <div className="salaryText">
+                                <Typography variant="caption" gutterBottom>
+                                Du tjener {lons20}% i forhold til gennemsnittet i din sektor og arbejdsfunktion
+                                </Typography>
+                            </div>
+                        </Paper>
+                    </div>
+
+                    <div className="salaryBox">
+                        <Paper className="salaryPaperBox" elevation={1}>
+                            <div className="radialBar">
+                                <Chart type="radialBar"
+                                    options={{
+                                        chart: {
+                                            height: 350,
+                                            type: 'radialBar',
+                                        },
+                                        plotOptions: {
+                                            radialBar: {
+                                                hollow: {
+                                                    size: '70%',
+                                                }
+                                            },
+                                        },
+                                        labels: ['Løn']
+                                    }}
+                                    series={[INDKP107]}
+                                    labels={['Progress']}
+                                    width="90%"></Chart>
+                            </div>
+                            <div className="salaryText">
+                                <Typography variant="caption" gutterBottom>
+                                Du tjener {INDKP107}% i forhold til gennemsnittet af den årlige indkomst af en person i dit område med samme uddannelsesniveau
+                                </Typography>
+                            </div>
+                        </Paper>
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <Typography variant="h5" gutterBottom>
+                        Hvordan bruger jeg denne data?
+                    </Typography>
+                    <Typography variant="caption" gutterBottom>
+                        Hvis du har fået et lavt tal i kategorier der omhandler udannelse, uddannelsesniveau, eller arbejdsfunktion, så bliver du umiddelbart underbetalt, sammenlignet med gennemsnittet. Hvis dette er tilfældet, så burde du tage aktion for at få dette til at ændre sig. Du kan eventuelt bruge dette, som grundlag til din arbejdsgiver, når i forhandler løn.
+                    </Typography>
                 </div>
             );
         }

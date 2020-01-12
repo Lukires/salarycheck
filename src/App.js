@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import SalarySuvery from './components/salarysurvey/SalarySurvey';
-import SalaryResults from './components/salarysurvey/SalaryResults';
 import Paper from '@material-ui/core/Paper';
 
 class App extends React.Component {
@@ -15,7 +14,6 @@ class App extends React.Component {
     if (this.state.results === "") {
       return <SalarySuvery/>
     }
-    return <SalaryResults/>
   }
 
   render() {

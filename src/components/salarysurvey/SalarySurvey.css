@@ -11,3 +11,25 @@
 .selectItemSurvey .MuiInputLabel-root .arbejdsfunktion {
     padding-right: 100%;
 }
+
+.salaryBox {
+    width: 30%;
+    display: inline-block;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 10px;
+}
+
+.salaryPaperBox{
+    position: relative;
+    
+}
+
+.radialBar{
+    margin-left: 5%;
+}
+
+.salaryText {
+    position: relative;
+    top: -30px;
+}
